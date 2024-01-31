@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    background: #e6e6e6;
+}
+
+.container {
+    max-width: 1370px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.table {
+    width: 100%;
+    width: 1400px;
+}
+
+.table__wrap {
+    margin: 100px 0 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.table__top {
+    margin: 0 0 30px;
+}
+
+.table__count {
+    max-width: 200px;
+    width: 100%;
+}
+
+.form {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+}
+
+@media (max-width: 642px) {
+    .search__btn,
+    .count__text {
+        display: none;
+    }
+}
