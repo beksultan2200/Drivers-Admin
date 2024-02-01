@@ -1,4 +1,5 @@
 import { TableColumnsType } from "antd";
+import { Key } from "react";
 
 export interface Driver {
     id: number;
@@ -45,7 +46,15 @@ export const tableHeader: TableColumnsType<Driver> = [
                 value: "Sleeper",
             },
         ],
-        onFilter: (value: string, record) => record.status.indexOf(value) === 0,
+        onFilter: (value: string | Key | boolean, record) => {
+            if (typeof value === "string") {
+                return record.status.indexOf(value) === 0;
+            } else if (typeof value === "boolean") {
+                return record.eldId === (value ? "Connected" : "Disconnected");
+            } else {
+                return false;
+            }
+        },
     },
     {
         title: "Location",
@@ -94,7 +103,18 @@ export const tableHeader: TableColumnsType<Driver> = [
                 value: "Disconnected",
             },
         ],
-        onFilter: (value: string, record) => record.eldId.indexOf(value) === 0,
+        onFilter: (value: string | Key | boolean, record) => {
+            if (typeof value === "string") {
+                // Логика фильтрации для строки
+                return record.eldId.indexOf(value) === 0;
+            } else if (typeof value === "boolean") {
+                // Логика фильтрации для boolean
+                return record.eldId === (value ? "Connected" : "Disconnected");
+            } else {
+                // Логика фильтрации для Key (не предполагаю, что это boolean)
+                return false;
+            }
+        },
     },
     {
         title: "Updated",

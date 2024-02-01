@@ -1,6 +1,6 @@
-import { Button, Flex, Form, Input, Typography } from "antd";
-import axios from "axios";
-import React, { useState } from "react";
+import { Button, Flex, Input, Typography } from "antd";
+// import axios from "axios";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
@@ -10,14 +10,14 @@ function Register() {
         confirmPasswor: "",
     });
 
-    const url = import.meta.env.VITE_BACKEND_LINK;
+    // const url = import.meta.env.VITE_BACKEND_LINK;
 
     const nav = useNavigate();
     const submitHandler = () => {
-        const data = {
-            userName: formData.userName,
-            password: formData.password,
-        };
+        // const data = {
+        //     userName: formData.userName,
+        //     password: formData.password,
+        // };
 
         if (
             formData.password === formData.confirmPasswor &&

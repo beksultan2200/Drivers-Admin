@@ -1,6 +1,6 @@
 import { Button, Flex, Input, Typography } from "antd";
-import axios from "axios";
-import React, { useState } from "react";
+// import axios from "axios";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function SignIn() {
@@ -9,7 +9,7 @@ function SignIn() {
         password: "",
     });
 
-    const url = import.meta.env.VITE_BACKEND_LINK;
+    // const url = import.meta.env.VITE_BACKEND_LINK;
 
     const nav = useNavigate();
     const submitHandler = () => {

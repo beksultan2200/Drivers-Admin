@@ -1,5 +1,5 @@
 import { Button, Flex, Input, Table, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import allDrivers, { Driver, tableHeader } from "../api/drivers";
 
