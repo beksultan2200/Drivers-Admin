@@ -1,22 +1,29 @@
 import { Button, Flex, Input, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import allDrivers, { Driver, tableHeader } from "../api/drivers";
+import { Driver, tableHeader } from "../api/drivers";
+import { getAllDrivers } from "../api";
 
 function Home() {
-    const [showCount, setShowCount] = useState(10);
     const [search, setSearch] = useState("");
+    const [driversCount, setDriversCount] = useState(10);
 
     const [drivers, setDrivers] = useState<Driver[]>([]);
+
+    const [driversCopy, setDriversCopy] = useState<Driver[]>([]);
 
     const nav = useNavigate();
 
     useEffect(() => {
-        setDrivers(allDrivers);
+        const tokenInfo = JSON.parse(
+            localStorage.getItem("aitimAdminToken") || ""
+        );
 
-        const token = localStorage.getItem("aitimAdminToken");
-        if (token) {
-            console.log(token);
+        if (tokenInfo && tokenInfo.date === new Date().toDateString()) {
+            getAllDrivers(tokenInfo.token).then((res) => {
+                setDrivers(res.data);
+                setDriversCopy(res.data);
+            });
         } else {
             nav("/signin");
         }
@@ -24,13 +31,18 @@ function Home() {
 
     const searchHandler = (value: string) => {
         setSearch(value);
-        value = value.trim().toLowerCase();
-        const found = allDrivers.filter(
-            (driver) =>
-                driver.fullName.toLowerCase().includes(value) ||
-                driver.location.toLowerCase().includes(value)
-        );
-        setDrivers(found);
+        if (value) {
+            value = value.trim().toLowerCase();
+            const found = driversCopy.filter(
+                (driver) =>
+                    driver.fullName?.toLowerCase().includes(value) ||
+                    driver.location?.toLowerCase().includes(value)
+            );
+
+            setDriversCopy(found);
+        } else {
+            setDriversCopy(drivers);
+        }
     };
 
     return (
@@ -56,11 +68,11 @@ function Home() {
                         </Typography.Text>
 
                         <Input
-                            placeholder={String(showCount)}
+                            placeholder={String(driversCount)}
                             type="number"
-                            value={showCount}
+                            value={driversCount}
                             className="table__count"
-                            onChange={(e) => setShowCount(+e.target.value)}
+                            onChange={(e) => setDriversCount(+e.target.value)}
                         />
                     </Flex>
                 </Flex>
@@ -68,8 +80,10 @@ function Home() {
                 <div style={{ overflow: "auto" }}>
                     <Table
                         columns={tableHeader}
-                        dataSource={drivers}
-                        pagination={{ pageSize: showCount }}
+                        dataSource={driversCopy}
+                        pagination={{
+                            pageSize: driversCount,
+                        }}
                         className="table"
                     />
                 </div>

@@ -27,7 +27,12 @@ export const tableHeader: TableColumnsType<Driver> = [
     {
         title: "full name",
         dataIndex: "fullName",
-        sorter: (a, b) => a.fullName.localeCompare(b.fullName),
+        sorter: (a, b) => {
+            if (a.fullName && b.fullName) {
+                return a.fullName.localeCompare(b.fullName);
+            }
+            return 0;
+        },
     },
     {
         title: "Status",
@@ -59,32 +64,62 @@ export const tableHeader: TableColumnsType<Driver> = [
     {
         title: "Location",
         dataIndex: "location",
-        sorter: (a, b) => a.fullName.localeCompare(b.fullName),
+        sorter: (a, b) => {
+            if (a.location && b.location) {
+                return a.location.localeCompare(b.location);
+            }
+            return 0;
+        },
     },
     {
         title: "Vehicle",
         dataIndex: "vehicle",
-        sorter: (a, b) => a.vehicle.localeCompare(b.cycle),
+        sorter: (a, b) => {
+            if (a.vehicle && b.vehicle) {
+                return a.vehicle.localeCompare(b.vehicle);
+            }
+            return 0;
+        },
     },
     {
         title: "Break",
         dataIndex: "break",
-        sorter: (a, b) => a.break.localeCompare(b.break),
+        sorter: (a, b) => {
+            if (a.break && b.break) {
+                return a.break.localeCompare(b.break);
+            }
+            return 0;
+        },
     },
     {
         title: "Drive",
         dataIndex: "drive",
-        sorter: (a, b) => a.drive.localeCompare(b.drive),
+        sorter: (a, b) => {
+            if (a.drive && b.drive) {
+                return a.drive.localeCompare(b.drive);
+            }
+            return 0;
+        },
     },
     {
         title: "Shift",
         dataIndex: "shift",
-        sorter: (a, b) => a.shift.localeCompare(b.shift),
+        sorter: (a, b) => {
+            if (a.shift && b.shift) {
+                return a.shift.localeCompare(b.shift);
+            }
+            return 0;
+        },
     },
     {
         title: "Cycle",
         dataIndex: "cycle",
-        sorter: (a, b) => a.cycle.localeCompare(b.cycle),
+        sorter: (a, b) => {
+            if (a.cycle && b.cycle) {
+                return a.cycle.localeCompare(b.cycle);
+            }
+            return 0;
+        },
     },
     {
         title: "Violations",
@@ -93,341 +128,19 @@ export const tableHeader: TableColumnsType<Driver> = [
     {
         title: "eldId",
         dataIndex: "eldId",
-        filters: [
-            {
-                text: "Connected",
-                value: "Connected",
-            },
-            {
-                text: "Disconnected",
-                value: "Disconnected",
-            },
-        ],
-        onFilter: (value: string | Key | boolean, record) => {
-            if (typeof value === "string") {
-                // Логика фильтрации для строки
-                return record.eldId.indexOf(value) === 0;
-            } else if (typeof value === "boolean") {
-                // Логика фильтрации для boolean
-                return record.eldId === (value ? "Connected" : "Disconnected");
-            } else {
-                // Логика фильтрации для Key (не предполагаю, что это boolean)
-                return false;
-            }
-        },
     },
     {
         title: "Updated",
         dataIndex: "updated",
-        sorter: (a, b) => a.updated.localeCompare(b.updated),
+        sorter: (a, b) => {
+            if (a.updated && b.updated) {
+                return a.updated.localeCompare(b.updated);
+            }
+            return 0;
+        },
     },
     {
         title: "telegram_id",
         dataIndex: "telegramPrivateId",
     },
 ];
-
-const allDrivers: Driver[] = [
-    {
-        id: 1,
-        fullName: "Michael Smith",
-        status: "Driving",
-        location: "100ml E from Dallas, Texas",
-        vehicle: "111",
-        break: "08:30",
-        drive: "11:45",
-        shift: "14:30",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Connected",
-        updated: "09:15",
-        telegramPrivateId: "111111",
-    },
-    {
-        id: 2,
-        fullName: "Jennifer Johnson",
-        status: "Off Duty",
-        location: "50ml S from Chicago, Illinois",
-        vehicle: "222",
-        break: "12:15",
-        drive: "15:30",
-        shift: "18:45",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "13:45",
-        telegramPrivateId: "222222",
-    },
-    {
-        id: 3,
-        fullName: "Christopher Davis",
-        status: "Sleeper",
-        location: "200ml N from Atlanta, Georgia",
-        vehicle: "333",
-        break: "10:00",
-        drive: "13:30",
-        shift: "16:15",
-        cycle: "48:53",
-        violations: "None",
-        eldId: "Connected",
-        updated: "11:45",
-        telegramPrivateId: "333333",
-    },
-    {
-        id: 4,
-        fullName: "Emily Wilson",
-        status: "Off Duty",
-        location: "75ml W from Miami, Florida",
-        vehicle: "444",
-        break: "07:45",
-        drive: "10:30",
-        shift: "13:15",
-        cycle: "42:19",
-        violations: "Speeding",
-        eldId: "Disconnected",
-        updated: "08:30",
-        telegramPrivateId: "444444",
-    },
-    {
-        id: 5,
-        fullName: "Daniel Martinez",
-        status: "Driving",
-        location: "150ml S from New York City, New York",
-        vehicle: "555",
-        break: "15:00",
-        drive: "18:30",
-        shift: "21:15",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Connected",
-        updated: "16:45",
-        telegramPrivateId: "555555",
-    },
-    {
-        id: 6,
-        fullName: "Olivia Anderson",
-        status: "Sleeper",
-        location: "120ml E from Los Angeles, California",
-        vehicle: "666",
-        break: "11:30",
-        drive: "14:45",
-        shift: "17:30",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Connected",
-        updated: "12:15",
-        telegramPrivateId: "666666",
-    },
-    {
-        id: 7,
-        fullName: "William Thomas",
-        status: "Off Duty",
-        location: "90ml N from Phoenix, Arizona",
-        vehicle: "777",
-        break: "13:45",
-        drive: "17:00",
-        shift: "19:45",
-        cycle: "42:19",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "14:30",
-        telegramPrivateId: "777777",
-    },
-    {
-        id: 8,
-        fullName: "Sophia Garcia",
-        status: "Driving",
-        location: "180ml W from Houston, Texas",
-        vehicle: "888",
-        break: "09:15",
-        drive: "12:30",
-        shift: "15:15",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Connected",
-        updated: "10:00",
-        telegramPrivateId: "888888",
-    },
-    {
-        id: 9,
-        fullName: "Ethan Brown",
-        status: "Off Duty",
-        location: "60ml S from Denver, Colorado",
-        vehicle: "999",
-        break: "06:30",
-        drive: "09:45",
-        shift: "12:30",
-        cycle: "42:19",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "07:15",
-        telegramPrivateId: "999999",
-    },
-    {
-        id: 10,
-        fullName: "Ava White",
-        status: "Sleeper",
-        location: "220ml N from Seattle, Washington",
-        vehicle: "101010",
-        break: "14:00",
-        drive: "17:30",
-        shift: "20:15",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Connected",
-        updated: "14:45",
-        telegramPrivateId: "10101010",
-    },
-    {
-        id: 11,
-        fullName: "Mason Moore",
-        status: "Driving",
-        location: "180ml E from San Francisco, California",
-        vehicle: "11111",
-        break: "08:30",
-        drive: "11:45",
-        shift: "14:30",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Connected",
-        updated: "09:15",
-        telegramPrivateId: "11111111",
-    },
-    {
-        id: 12,
-        fullName: "Lily Robinson",
-        status: "Off Duty",
-        location: "90ml S from Las Vegas, Nevada",
-        vehicle: "12222",
-        break: "12:15",
-        drive: "15:30",
-        shift: "18:45",
-        cycle: "42:19",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "13:45",
-        telegramPrivateId: "12222222",
-    },
-    {
-        id: 13,
-        fullName: "Logan Hall",
-        status: "Sleeper",
-        location: "200ml N from Boston, Massachusetts",
-        vehicle: "13333",
-        break: "10:00",
-        drive: "13:30",
-        shift: "16:15",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Connected",
-        updated: "11:45",
-        telegramPrivateId: "13333333",
-    },
-    {
-        id: 14,
-        fullName: "Avery Turner",
-        status: "Driving",
-        location: "75ml W from Portland, Oregon",
-        vehicle: "14444",
-        break: "07:45",
-        drive: "10:30",
-        shift: "13:15",
-        cycle: "52:41",
-        violations: "Speeding",
-        eldId: "Disconnected",
-        updated: "08:30",
-        telegramPrivateId: "14444444",
-    },
-    {
-        id: 15,
-        fullName: "Jackson Baker",
-        status: "Off Duty",
-        location: "150ml S from Minneapolis, Minnesota",
-        vehicle: "15555",
-        break: "15:00",
-        drive: "18:30",
-        shift: "21:15",
-        cycle: "42:19",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "16:45",
-        telegramPrivateId: "15555555",
-    },
-    {
-        id: 16,
-        fullName: "Scarlett Adams",
-        status: "Driving",
-        location: "120ml E from Detroit, Michigan",
-        vehicle: "16666",
-        break: "11:30",
-        drive: "14:45",
-        shift: "17:30",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Connected",
-        updated: "12:15",
-        telegramPrivateId: "16666666",
-    },
-    {
-        id: 17,
-        fullName: "Carter Garcia",
-        status: "Sleeper",
-        location: "90ml N from Orlando, Florida",
-        vehicle: "17777",
-        break: "13:45",
-        drive: "17:00",
-        shift: "19:45",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Connected",
-        updated: "14:30",
-        telegramPrivateId: "17777777",
-    },
-    {
-        id: 18,
-        fullName: "Aria White",
-        status: "Driving",
-        location: "180ml W from Raleigh, North Carolina",
-        vehicle: "18888",
-        break: "09:15",
-        drive: "12:30",
-        shift: "15:15",
-        cycle: "52:41",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "10:00",
-        telegramPrivateId: "18888888",
-    },
-    {
-        id: 19,
-        fullName: "Grayson Martinez",
-        status: "Off Duty",
-        location: "60ml S from Salt Lake City, Utah",
-        vehicle: "19999",
-        break: "06:30",
-        drive: "09:45",
-        shift: "12:30",
-        cycle: "42:19",
-        violations: "None",
-        eldId: "Disconnected",
-        updated: "07:15",
-        telegramPrivateId: "19999999",
-    },
-    {
-        id: 20,
-        fullName: "Ella Johnson",
-        status: "Sleeper",
-        location: "220ml N from San Antonio, Texas",
-        vehicle: "20000",
-        break: "14:00",
-        drive: "17:30",
-        shift: "20:15",
-        cycle: "36:24",
-        violations: "None",
-        eldId: "Connected",
-        updated: "14:45",
-        telegramPrivateId: "20000000",
-    },
-];
-
-export default allDrivers;
