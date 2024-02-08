@@ -14,12 +14,10 @@ function SignIn() {
     const nav = useNavigate();
 
     useEffect(() => {
-        const tokenInfo = JSON.parse(
-            localStorage.getItem("aitimAdminToken") || ""
-        );
-
-        if (tokenInfo && tokenInfo.date === new Date().toDateString()) {
-            nav("/");
+        const tokenInfo = localStorage.getItem("aitimAdminToken");
+        if (tokenInfo) {
+            const tokenObj = JSON.parse(tokenInfo);
+            if (tokenObj.date === new Date().toDateString()) nav("/");
         }
     }, []);
 

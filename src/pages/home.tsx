@@ -15,15 +15,15 @@ function Home() {
     const nav = useNavigate();
 
     useEffect(() => {
-        const tokenInfo = JSON.parse(
-            localStorage.getItem("aitimAdminToken") || ""
-        );
-
-        if (tokenInfo && tokenInfo.date === new Date().toDateString()) {
-            getAllDrivers(tokenInfo.token).then((res) => {
-                setDrivers(res.data);
-                setDriversCopy(res.data);
-            });
+        const tokenInfo = localStorage.getItem("aitimAdminToken");
+        if (tokenInfo) {
+            const tokenObj = JSON.parse(tokenInfo);
+            if (tokenObj.date === new Date().toDateString()) {
+                getAllDrivers(tokenObj.token).then((res) => {
+                    setDrivers(res.data);
+                    setDriversCopy(res.data);
+                });
+            }
         } else {
             nav("/signin");
         }
